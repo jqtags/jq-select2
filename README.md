@@ -2,7 +2,7 @@
 
 ###Examples
 ```html
-<jq-select2 data-max-options="2" class="myselectbox">
+<jq-select2 value="ant" class="myselectbox">
 	<option value="amr">Amar</option>
 	<option value="akb" >Akbar</option>
 	<option value="ant" >Anthony</option>
