@@ -1,0 +1,13 @@
+{
+	"name": "jqtags-jq-select2",
+	"main": "jqtags.slider.js",
+	"authors": ["Lalit Tanwar <lalit.tanwar07@gmail.com>"],
+	"description": "fancy bootstrap select",
+	"keywords": ["pitana", "jquery"],
+	"dependencies": {
+		"webmodules-jqtag": ">=0.0.0",
+    "jqmodules-select2": "3.5.3"
+	},
+	"license": "MIT",
+	"ignore": ["**/.*", "node_modules", "bower_components"]
+}

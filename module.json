@@ -1,0 +1,11 @@
+{
+	"name": "jqtags/jq-select2",
+	"jqtags/jq-select2": {
+		"js": ["jqtags.select2.js"],
+		"on": ["webmodules/jqtag", "jqmodules/select2"]
+	},
+	"jqtags/jq-select2/test": {
+		"js": ["test/jqtags.select2.test.js"],
+		"on": ["jqtags/jq-select2","spamjs/view"]
+	}
+}

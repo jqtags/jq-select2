@@ -1,0 +1,33 @@
+<h4>
+    INPUT
+</h4>
+
+<input rv-value="model.testvalue">
+<h4>
+    TEXT
+</h4>
+{model.testvalue}
+
+<h4>
+    SELECT
+</h4>
+<select is=jq-select rv-value="model.testvalue">
+    <option value="amr">Amar</option>
+    <option value="akb">Akbar</option>
+    <option value="ant">Anthony</option>
+</select>
+
+<h4>
+    JQ-SELECT2 - With Fixed Options
+</h4>
+<jq-select2 data-max-options="2" class="myselectbox" rv-value="model.testvalue">
+    <option value="amr">Amar</option>
+    <option value="akb">Akbar</option>
+    <option value="ant">Anthony</option>
+</jq-select2>
+<h4>
+    JQ-SELECT2 - With Remote Options
+</h4>
+<jq-select2 data-max-options="2" class="myselectbox2" rv-value="model.testvalue">
+</jq-select2>
+
