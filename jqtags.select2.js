@@ -12,14 +12,9 @@ _tag_("jqtags.select2", function (select) {
         default: "",
         onChange: "valueOnChange"
       },
-      multivalue: {
+      dropdownClass : {
         type: "string",
-        default: "",
-        onChange: "valueOnChange"
-      },
-      multiple: {
-        type: "boolean",
-        default: false
+        default: ""
       }
     },
     methods: ["updateOptions"],
@@ -52,7 +47,8 @@ _tag_("jqtags.select2", function (select) {
       this.$select.data(this.$.dataset).select2({
         query: query,
         initSelection : initSelection,
-        formatSelection:formatSelection
+        formatSelection:formatSelection,
+        dropdownCssClass : self.$.dropdownClass
       });
       this.$select.detach();
       this.$select.change(function (e) {
