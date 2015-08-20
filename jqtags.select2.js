@@ -24,7 +24,6 @@ _tag_("jqtags.select2", function (select) {
     },
     attachedCallback: function () {
       var self = this;
-      console.error("attachedCallback", this.$.dataset);
       var query,initSelection,formatSelection;
       if (this.$.innerHTML.trim() !== "") {
         this.$.innerHTML = '<select>' + this.$.innerHTML + '</select>';
@@ -60,14 +59,15 @@ _tag_("jqtags.select2", function (select) {
     formatSelection : function(item) {
       if(item){
         var self = this;
-        self.mySelectedOptions[item.id] = item.text;
-        self.trigger("jq.selected",{
+        var text = item.text;
+        //self.mySelectedOptions[item.id] = item.text;
+        self.trigger("jq.format",{
           item : item,
-          format : function(disp){
-            self.mySelectedOptions[item.id] = disp;
+          callback : function(disp){
+            text = disp;
           }
         });
-        return item.text;
+        return text;
       }
     },
     query : debounce(function(e){
@@ -81,18 +81,20 @@ _tag_("jqtags.select2", function (select) {
         }
       });
     }),
-    initSelection : debounce(function(element, callback){
+    initSelection : function(element, callback){
       var self = this;
-      callback(this.source.filter(function(option){
+      var option = this.source.filter(function(option){
         return option.value === self.$.value;
-      })[0]);
+      })[0];
+      if(option) callback(option);
       this.trigger("jq.init",{
         value : this.$.value,
-        callback : function(options){
-          return callback(options);
+        callback : function(option2){
+          if(option2)
+            return  callback(option2);
         }
       });
-    }),
+    },
     detachedCallback: function () {
       this.$select.select2("destroy");
     },
