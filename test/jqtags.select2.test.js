@@ -17,6 +17,7 @@ define({
     },
     _init_: function () {
       var self = this;
+      _importStyle_("jqtags/jq-select2/test");
       self.myOptions = [{
         id: "amr", text : "AMAR"
       },{
