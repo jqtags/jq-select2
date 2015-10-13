@@ -52,8 +52,8 @@ _tag_("jqtags.select2", function (select) {
       this.$select.detach();
       this.$select.change(function (e) {
         self.$.value = self.$select.val();
-        self.trigger("change");
-        self.trigger("input");
+        self.trigger("change",{value : self.$.value});
+        self.trigger("input",{value : self.$.value});
       });
     },
     formatSelection : function(item) {
