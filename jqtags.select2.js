@@ -52,15 +52,15 @@ _tag_("jqtags.select2", function (select) {
       this.$select.detach();
       this.$select.change(function (e) {
         self.$.value = self.$select.val();
-        self.trigger("change",{value : self.$.value});
-        self.trigger("input",{value : self.$.value});
+        self.trigger("change",{value : self.$.value, text : self.mySelectedOptions[self.$.value] });
+        self.trigger("input",{value : self.$.value,text : self.mySelectedOptions[self.$.value]});
       });
     },
     formatSelection : function(item) {
       if(item){
         var self = this;
         var text = item.text;
-        //self.mySelectedOptions[item.id] = item.text;
+        self.mySelectedOptions[item.id] = item.text;
         self.trigger("jq.format",{
           item : item,
           callback : function(disp){
