@@ -29,7 +29,7 @@ _tag_("jqtags.select2", function (select) {
     attachedCallback: function () {
       var self = this;
       var query,initSelection,formatSelection,formatResult;
-      if (this.$.innerHTML.trim() !== "") {
+      if (this.$.innerHTML.trim() !== "" && !this.$.multiple) {
         this.$.innerHTML = '<select>' + this.$.innerHTML + '</select>';
         this.$select = jq(this.$).find("select");
         this.$select.val(this.$.value);
@@ -51,7 +51,7 @@ _tag_("jqtags.select2", function (select) {
         this.initRemoteConfig();
       }
       this.$select.data(this.$.dataset).select2({
-        multiple: this.$.multiple,
+        multiple: this.$.multiple || undefined,
         query: query,
         initSelection : initSelection,
         formatSelection:formatSelection,
