@@ -15,6 +15,10 @@ _tag_("jqtags.select2", function (select) {
       dropdownClass : {
         type: "string",
         default: ""
+      },
+      multiple : {
+        type: "boolean",
+        default: true
       }
     },
     methods: ["updateOptions"],
@@ -24,7 +28,7 @@ _tag_("jqtags.select2", function (select) {
     },
     attachedCallback: function () {
       var self = this;
-      var query,initSelection,formatSelection;
+      var query,initSelection,formatSelection,formatResult;
       if (this.$.innerHTML.trim() !== "") {
         this.$.innerHTML = '<select>' + this.$.innerHTML + '</select>';
         this.$select = jq(this.$).find("select");
@@ -41,12 +45,17 @@ _tag_("jqtags.select2", function (select) {
         formatSelection = function(item) {
           return self.formatSelection.apply(self,arguments);
         };
+        formatResult = function(item) {
+          return self.formatResult.apply(self,arguments);
+        };
         this.initRemoteConfig();
       }
       this.$select.data(this.$.dataset).select2({
+        multiple: this.$.multiple,
         query: query,
         initSelection : initSelection,
         formatSelection:formatSelection,
+        formatResult:formatResult,
         dropdownCssClass : self.$.dropdownClass
       });
       this.$select.detach();
@@ -62,6 +71,20 @@ _tag_("jqtags.select2", function (select) {
         var text = item.text;
         self.mySelectedOptions[item.id] = item.text;
         self.trigger("jq.format",{
+          item : item,
+          callback : function(disp){
+            text = disp;
+          }
+        });
+        return text;
+      }
+    },
+    formatResult : function(item) {
+      if(item){
+        var self = this;
+        var text = item.text;
+        self.mySelectedOptions[item.id] = item.text;
+        self.trigger("jq.format.result",{
           item : item,
           callback : function(disp){
             text = disp;
@@ -104,7 +127,7 @@ _tag_("jqtags.select2", function (select) {
       }
     },
     valueOnChange : function(e, oldValue, newValue){
-      this.$select.select2("val", (newValue + "").split(","));
+      this.$select.select2("val", is.Empty(newValue) ? "" : (newValue + "").split(","));
     }
   };
 });
