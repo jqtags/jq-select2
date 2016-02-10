@@ -19,6 +19,10 @@ _tag_("jqtags.select2", function (select) {
       multiple : {
         type: "boolean",
         default: true
+      },
+      placeholder: {
+        type: "string",
+        default: ""
       }
     },
     methods: ["updateOptions"],
@@ -56,8 +60,10 @@ _tag_("jqtags.select2", function (select) {
         initSelection : initSelection,
         formatSelection:formatSelection,
         formatResult:formatResult,
+        placeholder: self.$.placeholder,
         dropdownCssClass : self.$.dropdownClass
       });
+        console.log(self.$);
       this.$select.detach();
       this.$select.change(function (e) {
         self.$.value = self.$select.val();
