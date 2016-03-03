@@ -70,7 +70,6 @@ _tag_("jqtags.select2", function(select) {
                 placeholder: self.$.placeholder,
                 dropdownCssClass: self.$.dropdownClass
             });
-            console.log(self.$);
             this.$select.detach();
             this.$select.change(function(e) {
                 self.$.value = self.$select.val();
@@ -148,7 +147,7 @@ _tag_("jqtags.select2", function(select) {
             this.initRemoteConfig();
             return this.addOptions(options)
         },
-        setOptions: function (options) {
+        setOptions: function (options,defaultValue) {
           this.initRemoteConfig();
           var self = this;
           var optionsString = "";
@@ -164,6 +163,12 @@ _tag_("jqtags.select2", function(select) {
             }
           }
           self.$.innerHTML = optionsString;
+          if(defaultValue !== undefined){
+            self.$.value = defaultValue;
+          } else if(options[0]){
+            self.$.value = options[0].id;
+          }
+          this.$select.select("destroy");
           self.attachedCallback();
         },
         toList: function (str) {
