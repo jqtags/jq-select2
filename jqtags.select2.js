@@ -155,7 +155,7 @@ _tag_("jqtags.select2", function(select) {
         setOptions: function (options,defaultValue) {
           this.initRemoteConfig();
           var self = this;
-          var optionsString = "";
+          var optionsString = self.$.placeholder?"<option></option>":"";
           for (var i in options) {
             if (options[i].children !== undefined) {
               optionsString += makeOptionGroup(options[i]);
@@ -173,7 +173,7 @@ _tag_("jqtags.select2", function(select) {
           } else if(options[0]){
             self.$.value = options[0].id;
           }
-          this.$select.select("destroy");
+          this.$select.select2("destroy");
           self.attachedCallback();
         },
         toList: function (str) {
