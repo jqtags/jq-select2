@@ -26,6 +26,10 @@ _tag_("jqtags.select2", function(select) {
                 type: "boolean",
                 "default": true
             },
+            allowclear: {
+                type: "boolean",
+                "default": true
+            },
             placeholder: {
                 type: "string",
                 "default": ""
@@ -63,6 +67,7 @@ _tag_("jqtags.select2", function(select) {
             }
             this.$select.data(this.$.dataset).select2({
                 multiple: this.$.multiple || undefined,
+                allowClear: this.$.allowclear || false,
                 query: query,
                 initSelection: initSelection,
                 formatSelection: formatSelection,
