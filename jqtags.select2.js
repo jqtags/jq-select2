@@ -33,6 +33,10 @@ _tag_("jqtags.select2", function(select) {
             placeholder: {
                 type: "string",
                 "default": ""
+            },
+            display : {
+              type: "string",
+              "default": ""
             }
         },
         methods: [ "setOptions",  "updateOptions"],
@@ -75,6 +79,10 @@ _tag_("jqtags.select2", function(select) {
                 placeholder: self.$.placeholder,
                 dropdownCssClass: self.$.dropdownClass
             });
+            if(this.$.value){
+              this.$select.select2("val",this.$.value);
+  //            this.valueOnChange(undefined, undefined,this.$.value);
+            }
             this.$select.detach();
             this.$select.change(function(e) {
                 self.$.value = self.$select.val();
@@ -180,7 +188,11 @@ _tag_("jqtags.select2", function(select) {
           return is.String(str) && !is.Empty(str) && !isCorrupted[str] ? str.split(",") : (is.Array(str) ? str : []);
         },
         valueOnChange: function(e, oldValue, newValue) {
-            this.$select.select2("val", is.Empty(newValue) ? "" : (newValue + "").split(","));
+            if(this.$select){
+              this.$select.select2("val", is.Empty(newValue) ? "" : (newValue + "").split(","));
+            } else {
+              console.error("valueOnChange this.$select does not exists");
+            }
         }
     };
 });
