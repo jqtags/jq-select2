@@ -37,6 +37,11 @@ _tag_("jqtags.select2", function(select) {
             display : {
               type: "string",
               "default": ""
+            },
+            disabled : {
+              type: "string",
+              "default": "disabled",
+              onChange: "disabledOnChange"
             }
         },
         methods: [ "setOptions",  "updateOptions"],
@@ -193,6 +198,13 @@ _tag_("jqtags.select2", function(select) {
             } else {
               console.error("valueOnChange this.$select does not exists");
             }
+        },
+        disabledOnChange : function(e, oldValue, newValue){
+        	if(this.$.hasAttribute('disabled')){
+        		this.$select.select2("enable",false);
+        	} else {
+        		this.$select.select2("enable",true);
+        	}
         }
     };
 });
