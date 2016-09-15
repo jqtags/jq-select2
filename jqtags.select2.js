@@ -44,7 +44,7 @@ _tag_("jqtags.select2", function(select) {
               onChange: "disabledOnChange"
             }
         },
-        methods: [ "setOptions",  "updateOptions"],
+        methods: [ "setOptions",  "updateOptions", "getOption"],
         initRemoteConfig: function() {
             this.mySelectedOptions = {};
             this.source = [];
@@ -93,11 +93,13 @@ _tag_("jqtags.select2", function(select) {
                 self.$.value = self.$select.val();
                 self.trigger("input", {
                     value: self.$.value,
-                    text: self.mySelectedOptions[self.$.value]
+                    text: self.mySelectedOptions[self.$.value],
+                    item : self.selectedOption
                 });
                 self.trigger("change", {
                     value: self.$.value,
-                    text: self.mySelectedOptions[self.$.value]
+                    text: self.mySelectedOptions[self.$.value],
+                    item : self.selectedOption
                 });
             });
         },
@@ -105,6 +107,7 @@ _tag_("jqtags.select2", function(select) {
             if (item) {
                 var self = this;
                 var text = item.text;
+                this.selectedOption = item;
                 self.mySelectedOptions[item.id] = item.text;
                 self.trigger("jq.format", {
                     item: item,
@@ -155,6 +158,9 @@ _tag_("jqtags.select2", function(select) {
         },
         detachedCallback: function() {
             this.$select.select2("destroy");
+        },
+        getOption : function(){
+            return this.selectedOption;
         },
         addOptions: function(options) {
             for (var i in options) {
